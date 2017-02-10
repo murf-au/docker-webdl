@@ -1,0 +1,10 @@
+version: '3'
+services:
+  webdl:
+    container_name: webdl
+    image: webdl
+    volumes:
+      # The data directory is where programmes will be downloaded to
+      - ./data:/home/webdl/data:rw
+      # Mount your patterns.txt into the container
+      - ./patterns.txt:/home/webdl/patterns.txt
