@@ -6,7 +6,7 @@ A Docker image for running webdl [delx/webdl](https://bitbucket.org/delx/webdl).
 
 ## Building
 
-    docker build . -t tastle/webdl:latest
+    docker build . -t trastle/webdl:latest
 
 ## Running
 
@@ -15,23 +15,26 @@ Webdl supports two modes, see [delx/webdl README.md](https://bitbucket.org/delx/
 1. Automatic - download everything matching the globs in patterns.txt
 2. Interactive - manually browse, select and download programs.
 
-**Note:** 
-
-* All of the following expect to be run from the root of this repo.
-* Programs will be downloaded to the ```./data```directory on the Docker host.
-
 ### Run Automatic Mode - autograbber.py (default):
 
-I suggest you edit ```patterns.txt``` first unless you like [Play School](http://www.abc.net.au/abcforkids/sites/playschool/).
+1. Create a data directory for your downloads
 
-#### Using docker-compose
+        mkdir data
+        
+2. Create ```patterns.txt``` with the programs you want to download
 
-    docker-compose up
+        echo "ABC iView/By Channel/ABC4Kids/Play School/*" > patterns.txt
 
-#### Using docker run
+3. Run the container
 
-    docker run --rm -v `pwd`/data:/home/webdl/data:rw -v `pwd`/patterns.txt:/home/webdl/patterns.txt:ro tastle/webdl
+        docker run --rm -v `pwd`/data:/home/webdl/data:rw -v `pwd`/patterns.txt:/home/webdl/patterns.txt:ro trastle/webdl
 
 ### Run Interactive Mode - grabber.py
 
-    docker run --rm -ti -v `pwd`/data:/home/webdl/data:rw tastle/webdl python3 /home/webdl/webdl/grabber.py
+1. Create a data directory for your downloads
+
+        mkdir data
+        
+2. Run the container
+
+        docker run --rm -ti -v `pwd`/data:/home/webdl/data:rw trastle/webdl python3 /home/webdl/webdl/grabber.py
