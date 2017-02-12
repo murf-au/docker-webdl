@@ -1,5 +1,7 @@
 # docker-webdl
 
+[![Docker Build](https://img.shields.io/docker/automated/trastle/webdl.svg)](https://hub.docker.com/r/trastle/webdl/)
+
 A Docker image for running webdl [delx/webdl](https://bitbucket.org/delx/webdl).
 
 ## Building
