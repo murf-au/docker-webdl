@@ -18,7 +18,7 @@ RUN mkdir -p /home/webdl/data
 
 # Grab webdl & pin to a commit for versioning
 RUN cd /home/webdl && git clone https://bitbucket.org/delx/webdl
-RUN cd /home/webdl/webdl && git reset --hard ef87849
+RUN cd /home/webdl/webdl && git reset --hard 9832f6d
 RUN chown -R webdl:webdl /home/webdl
 
 USER webdl
