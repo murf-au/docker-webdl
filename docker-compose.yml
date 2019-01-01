@@ -2,7 +2,7 @@ version: '3'
 services:
   webdl:
     container_name: webdl
-    image: webdl
+    image: trastle/webdl
     volumes:
       # The data directory is where programmes will be downloaded to
       - ./data:/home/webdl/data:rw

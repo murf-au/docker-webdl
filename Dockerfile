@@ -1,13 +1,13 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 # Get the basic tools we need
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get -y install git-core
 
 # Install the dependencies as documented
-RUN apt-get -y install python3 python3-lxml python3-requests python3-requests-cache
-RUN apt-get -y install livestreamer python-crypto
-RUN apt-get -y install ffmpeg
+RUN apt-get -y install python3 python3-lxml python3-requests python3-requests-cache \
+    livestreamer python-crypto \
+    ffmpeg
 
 # Cleanup after apt-get
 RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/*
@@ -18,7 +18,7 @@ RUN mkdir -p /home/webdl/data
 
 # Grab webdl & pin to a commit for versioning
 RUN cd /home/webdl && git clone https://bitbucket.org/delx/webdl
-RUN cd /home/webdl/webdl && git reset --hard 9832f6d
+RUN cd /home/webdl/webdl && git reset --hard 1b35304
 RUN chown -R webdl:webdl /home/webdl
 
 USER webdl
