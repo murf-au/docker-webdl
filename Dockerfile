@@ -16,14 +16,14 @@ RUN apt-get update -y && \
     rm -rf /var/lib/apt/lists/*
 
 # Webdl does not like running as root so setup a user & home dir
-RUN useradd -ms /bin/bash webdl -d /home/webdl &&
+RUN useradd -ms /bin/bash webdl -d /home/webdl && \
     mkdir -p /home/webdl/data
 
 # Grab webdl & pin to a commit for versioning
-RUN cd /home/webdl &&
-    git clone https://bitbucket.org/delx/webdl &&
-    cd /home/webdl/webdl &&
-    git reset --hard 1b35304 &&
+RUN cd /home/webdl && \
+    git clone https://bitbucket.org/delx/webdl && \
+    cd /home/webdl/webdl && \
+    git reset --hard 1b35304 && \
     chown -R webdl:webdl /home/webdl
 
 USER webdl
