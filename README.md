@@ -2,7 +2,9 @@
 
 [![Docker Build](https://img.shields.io/docker/automated/trastle/webdl.svg)](https://hub.docker.com/r/trastle/webdl/)
 
-A Docker image for running webdl [delx/webdl](https://bitbucket.org/delx/webdl).
+[WebDL](https://bitbucket.org/delx/webdl) is a set of Python scripts to grab video from online Free To Air Australian channels for offline viewing.
+
+This repo provides a Docker Image for running webdl.
 
 ## Building
 
