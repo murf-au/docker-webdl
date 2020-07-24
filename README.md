@@ -39,4 +39,4 @@ Webdl supports two modes, see [delx/webdl README.md](https://bitbucket.org/delx/
         
 2. Run the container
 
-        docker run --rm -ti -v `pwd`/data:/home/webdl/data:rw trastle/webdl python3 /home/webdl/webdl/grabber.py
+        docker run --rm -ti -v `pwd`/data:/home/webdl/data:rw trastle/webdl python3 /home/webdl/grabber.py
