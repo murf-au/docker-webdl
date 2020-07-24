@@ -1,16 +1,24 @@
-FROM ubuntu:18.04
+FROM alpine/git as git
+
+# Grab webdl & pin to a commit for versioning
+RUN git clone https://bitbucket.org/delx/webdl /webdl && \
+    cd /webdl && \
+    git reset --hard 80158b6
+
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install the dependencies as documented in the upstream readme
 # + git-core for the clone performed later
 RUN apt-get update -y && \
-    apt-get -y install ffmpeg \
-                       git-core \
-                       livestreamer \
-                       python-crypto \
+    apt-get --no-install-recommends -y install ffmpeg \
                        python3 \
                        python3-lxml \
+                       python3-pip \
                        python3-requests \
-                       python3-requests-cache && \
+                       python3-requests-cache \
+                       streamlink && \
     apt-get clean && \
     apt-get purge && \
     rm -rf /var/lib/apt/lists/*
@@ -19,14 +27,13 @@ RUN apt-get update -y && \
 RUN useradd -ms /bin/bash webdl -d /home/webdl && \
     mkdir -p /home/webdl/data
 
-# Grab webdl & pin to a commit for versioning
-RUN cd /home/webdl && \
-    git clone https://bitbucket.org/delx/webdl && \
-    cd /home/webdl/webdl && \
-    git reset --hard 1b35304 && \
-    chown -R webdl:webdl /home/webdl
+COPY --from=git /webdl /home/webdl/.
 
+# Install any python requirements Webdl lists
+RUN pip3 install -r /home/webdl/requirements.txt
+
+RUN chown -R webdl:webdl /home/webdl
 USER webdl
 WORKDIR /home/webdl/data
 
-CMD ["python3", "/home/webdl/webdl/autograbber.py", "/home/webdl/data", "/home/webdl/patterns.txt"]
+CMD ["python3", "/home/webdl/autograbber.py", "/home/webdl/data", "/home/webdl/patterns.txt"]
