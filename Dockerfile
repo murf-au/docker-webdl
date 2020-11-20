@@ -1,9 +1,14 @@
-FROM alpine/git as git
+FROM ubuntu:20.04 as git
+
+RUN apt-get update -y && \
+    apt-get --no-install-recommends -y install git
+
+ENV GIT_SSL_NO_VERIFY=1
 
 # Grab webdl & pin to a commit for versioning
 RUN git clone https://bitbucket.org/delx/webdl /webdl && \
     cd /webdl && \
-    git reset --hard 80158b6
+    git reset --hard 5ad7c98
 
 FROM ubuntu:20.04
 
