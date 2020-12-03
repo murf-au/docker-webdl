@@ -37,8 +37,8 @@ COPY --from=git /webdl /home/webdl/.
 # Install any python requirements Webdl lists
 RUN pip3 install -r /home/webdl/requirements.txt
 
-RUN chown -R webdl:webdl /home/webdl
-USER webdl
+# RUN chown -R webdl:webdl /home/webdl
+# USER webdl
 WORKDIR /home/webdl/data
 
 CMD ["python3", "/home/webdl/autograbber.py", "/home/webdl/data", "/home/webdl/patterns.txt"]
